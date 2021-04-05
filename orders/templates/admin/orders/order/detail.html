@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/pdf.css' %}">
+    <style type="text/css">
+    </style>
+   </head>
+  
+  <body>
+    <h2>Накладная № {{ order.invoice_num }} от {{ order.created }}</h2>
+
+      <!-- <table>
+        <tr>
+          <th>Поставщик: </th>
+          <td>ДОЛ ХЛЕБ</td>
+        </tr>
+        <tr>
+          <th>Покупатель:</th>
+          <td>{{ user.first_name }}, {{ user.address }}<br>т. {{ user.phone }}</td>
+        </tr>
+      </table> -->
+
+      <p><strong>Поставщик:</strong> &nbsp; &nbsp; ДОЛ ХЛЕБ
+      <br>
+        <strong>Покупатель:</strong> &nbsp; &nbsp; {{ user.first_name }}, {{ user.address }}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ user.phone }}</p>
+
+    <div class="module">
+    <div class="tabular inline-related last-related">
+
+      <table>
+        <thead>
+          <tr>
+            <th>№</th>
+            <th>НАИМЕНОВАНИЕ</th>
+            <th>ЦЕНА</th>
+            <th>КОЛ-ВО</th>
+            <th>КОММЕНТАРИЙ</th>
+            <th>СУММА</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in order.items.all %}
+            <tr class="row{% cycle "1" "2" %}">
+              <td class="num">{{ item.item_number }}</td>
+              <td>{{ item.product.name }}</td>
+              <td class="num">{{ item.price }}</td>
+              <td class="num">{{ item.quantity }}</td>
+              <td>{{ item.option }}</td>
+              <td class="num">{{ item.get_cost }}</td>
+            </tr>
+          {% endfor %}
+            <tr class="total">
+              <td colspan="5">ИТОГО:</td>
+              <td class="num">{{ order.get_total_cost }} руб.</td>
+            </tr>
+        </tbody>
+      </table>
+
+    </div>
+    </div>
+
+      <table>
+        <tr>
+          <td width="50">СДАЛ:</td>
+          <td>___________________/__________________________________________________
+            </td>
+        </tr>
+        <tr>
+          <td width="50">ПРИНЯЛ:</td>
+          <td>___________________/__________________________________________________
+          </td>
+        </tr>
+      </table>
+  </body>
+</html>
+
+<ul class="object-tools">
+  <li>
+  <a href="#" onclick="window.print();">--></a>
+  </li>
+  </ul>

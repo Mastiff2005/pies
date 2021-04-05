@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block title %}Корзина{% endblock %}
+{% block content %}
+{% load static %}
+
+<html>
+	<head>
+		<style>
+		
+			body {
+			  margin: 0;
+			}
+			
+			table {
+				box-shadow: 2px 2px 2px rgba(0, 0, 0, .4);
+			}
+			
+			table th, table td {
+				width: 100%;
+				background-color: #fcdeb8;
+		   		margin-left: 0;
+				font-size: 14.5px;
+		    	text-align: center;
+		    	border-collapse: collapse;
+		    	margin: 0;
+		    	padding: 3px;
+			    border: 1px solid #800000;
+		    }
+		    .card_1 {
+				width: 49%;
+				background-color: #fcdeb8;
+				margin-bottom: 5px;
+				padding: 10px 5px 10px 5px;
+				display: inline-block;
+				text-align: center;
+				box-shadow: 2px 2px 2px rgba(0, 0, 0, .4);
+				border: 1px solid #800000;
+			}
+			
+			.card_2 {
+				width: 100%;
+				background-color: #fcdeb8;
+				margin-right: 200px;
+				margin-bottom: 5px;
+				padding: 10px 10px 10px 10px;
+				display: inline-block;
+				text-align: center;
+				box-shadow: 2px 2px 2px rgba(0, 0, 0, .4);
+				border: 1px solid #800000;
+			}
+		
+			.card-title {
+				color: #800000;
+				font-size: 13px;
+				font-weight: 700;
+				margin-bottom: 0px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			
+			.button_1 {
+				width: 80px;
+				color: #800000;
+				background-color: #ebc0a2;
+				font-weight: 500;
+				margin-bottom: 5px;
+				border-radius: 3px;
+				border-color: #ebc0a2;
+			}
+		    
+		    .button_2 {
+				width: 80px;
+				color: #800000;
+				background-color: #bcd182;
+				font-weight: 500;
+				border-radius: 3px;
+				border-color: #bcd182;
+			}
+		    
+		</style>
+	</head>
+	<body>
+	    <h2 style="color: #800000">Ваша корзина</h2>
+	    <table>
+	        <thead>
+	        <tr style="color: #800000">
+	            <th>Товар</th>
+	            <th>Кол-во</th>
+	            <th>Убрать/Добавить</th>
+	            <th>Цена</th>
+	            <th>Сумма</th>
+	        </tr>
+	        </thead>
+	        <tbody>
+	        {% for item in cart %}
+	            {% with product=item.product %}
+	                <tr>
+	                    <td>{{ product.name }} <br>
+	                    <a href="{{ product.image.url }}">
+	                            <img src="
+	                                {% if product.image %}
+	                                    {{ product.image.url }}
+	                                {% else %}
+	                                    {% static "img/no_image.png" %}
+	                                {% endif %}" width=80px>
+	                        </a>
+	                    </td>
+	                    <td><b><a id={{ product.id }}>{{ item.quantity }}</a></b></td>
+	                    <td>
+	                    	<input onclick="remove_product({{ product.id }}, 1, 'True')" type="button" class="button_1" value="УБРАТЬ">
+	                    	<br>
+	                		<input onclick="add_product({{ product.id }}, 1, 'False')" type="button" class="button_2" value="Добавить">
+	                	</td>
+	                    <td class="num">{{ item.price }}</td>
+	                    <td class="num"><strong>{{ item.total_price }}</strong></td>
+	                </tr>
+	            {% endwith %}
+	        {% endfor %}
+	        <tr class="total">
+	            <td><strong>Общая сумма</strong></td>
+	            <td colspan="3"></td>
+	            <td class="num"><strong>{{ cart.get_total_price }} руб.</strong></td>
+	        </tr>
+	        </tbody>
+	    </table>
+	    	<br>
+	
+	    <div class="card_2">
+	    	<a class="card-title" href="{% url "cart:cart_detail" %}">ОБНОВИТЬ КОРЗИНУ</a>
+	    </div><br>
+	    <div class="card_1">
+	    	<a class="card-title" href="{% url "catalogue" %}">ПРОДОЛЖИТЬ ВЫБОР</a>
+	    </div>
+	    <div class="card_1">
+	    	<a class="card-title" href="{% url "orders:order_create" %}">ОФОРМИТЬ ЗАКАЗ</a>
+	    </div>
+    </body>
+</html>
+{% endblock %}

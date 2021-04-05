@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Оформление заказа{% endblock %}
+
+{% block content %}
+	<style>
+		.button_1 {
+			width: 150px;
+			color: #800000;
+			background-color: #ebc0a2;
+			font-weight: 600;
+			margin-bottom: 5px;
+			border-radius: 3px;
+			border-color: #ebc0a2;
+		}
+	</style>
+    <h2 style="color: #800000">Оформление заказа</h2>
+    <div class="order-info">
+        <h4 style="color: #800000">Ваш заказ</h4>
+        <ul>
+            {% for item in cart %}
+                <li>
+                    {{ item.quantity }} шт. {{ item.product.name }}
+                    <span>{{ item.total_price }} руб.</span>
+                </li>
+            {% endfor %}
+        </ul>
+        <p>Сумма заказа: <b>{{ cart.get_total_price }} руб.</b></p>
+    </div>
+    <form action="." method="post" class="order-form">
+        <!-- {{ form.as_p }} -->
+        {% if request.user.is_staff %}
+        Выбрать профиль: {{ form.user }}
+        {% endif %}
+        <br>
+        Пользователь: <b>{{ request.user }}</b>
+        <br>
+        Комментарий: {{ form.comment }}
+        <p><input type="submit" value="Отправить заказ" class="button_1"></p>
+        {% csrf_token %}
+    </form>
+   <!-- <a href="/orders/getpdf/">Скачать PDF файл</a>-->
+{% endblock %}

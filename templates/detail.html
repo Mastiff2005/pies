@@ -1,0 +1,83 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block extrastyle %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/admin.css" %}" />
+{% endblock %}
+
+{% block title %}
+  Накладная № {{ order.invoice_num }} {{ block.super }}
+{% endblock %}
+
+<!--{% block breadcrumbs %}
+  <div class="breadcrumbs">
+    <a href="{% url "admin:index" %}">Home</a> &rsaquo;
+    <a href="{% url "admin:orders_order_changelist" %}">Orders</a>&rsaquo;
+    <a href="{% url "admin:orders_order_change" order.id %}">Order {{ order.id }}</a>
+    &rsaquo; Detail
+  </div>
+{% endblock %} -->
+
+{% block content %}
+  <ul class="object-tools">
+    <li>
+      <a href="#" onclick="window.print();">Печать</a>
+    </li>
+  </ul>
+  <h2>Накладная № {{ order.invoice_num }} от {{ order.created }}</h2>
+  <table>
+    <tr>
+      <th>Поставщик: </th>
+      <td><input type="text" value="ДОЛ ХЛЕБ"><br></td>
+      </tr>
+    <tr>
+      <th>Покупатель:</th>
+      <td>{{ user.first_name }}, {{ user.address }}<br>т. {{ user.phone }}</td>
+    </tr>
+ <!--<tr>
+ <th>E-mail</th>
+ <td><a href="mailto:{{ order.email }}">{{ order.email }}</a></td>
+ </tr> -->
+ <!--<tr>
+ <th>Total amount</th>
+ <td>${{ order.get_total_cost }}</td>
+ </tr>
+ <tr>
+ <th>Status</th>
+ <td>{% if order.paid %}Paid{% else %}Pending payment{% endif %}</td>
+ </tr> -->
+ </table>
+ <div class="module">
+ <div class="tabular inline-related last-related">
+ <table>
+ <!--<h2>Items bought</h2> -->
+ <thead>
+ <tr>
+ <th>№</th>
+ <th>НАИМЕНОВАНИЕ</th>
+ <th>ЦЕНА</th>
+ <th>КОЛ-ВО</th>
+ <th>КОММЕНТАРИЙ</th>
+ <th>СУММА</th>
+ </tr>
+ </thead>
+ <tbody>
+ {% for item in order.items.all %}
+ <tr class="row{% cycle "1" "2" %}">
+ <td class="num">{{ item.item_number }}</td>
+ <td>{{ item.product.name }}</td>
+ <td class="num">{{ item.price }}</td>
+ <td class="num">{{ item.quantity }}</td>
+ <td>{{ item.option }}</td>
+ <td class="num">{{ item.get_cost }}</td>
+ </tr>
+ {% endfor %}
+ <tr class="total">
+ <td colspan="5">ИТОГО:</td>
+ <td class="num">{{ order.get_total_cost }} руб.</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+ </div>
+{% endblock %}

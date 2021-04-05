@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выгрузка продуктов</title>
+</head>
+<body>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="ввести">
+      </form>
+    <table>
+        <thead>
+        <tr>
+            <th>Наименование</th>
+            <th>Количество</th>
+            <th>Производитель</th>
+            <th>Категория</th>
+            <th>Сумма</th>
+            <th>Закупочная стоимость</th>
+        </tr>
+        </thead>
+        <tbody>
+        <h3>Реализация:</h3>
+        {% for item in selection_modified %}
+        <tr>
+            <td>{{ item.product_name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.product_manufacturer }}</td>
+            <td>{{ item.product.category }}</td>
+            <td>{{ item.product_price }}</td>
+            <td>{{ item.product_price_purc }}</td>
+        </tr>
+    	{% endfor %}
+    	<tr>
+    		<th>Сумма всего</th>
+    		<th>Закупка всего</th>
+    	</tr>
+    	<tr>
+
+
+    		<th></th>
+
+    	</tr>
+        </tbody>
+    </table>
+    
+    <table>
+        <thead>
+        <tr>
+            <th>Наименование</th>
+            <th>Количество</th>
+            <th>Производитель</th>
+            <th>Категория</th>
+            <th>Сумма</th>
+        </tr>
+        </thead>
+        <tbody>
+        <h3>Возвраты:</h3>
+        {% for item in return_goods %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.product.manufacturer }}</td>
+            <td>{{ item.product.category }}</td>
+            <td>{{ item.price }}</td>
+        </tr>
+    	{% endfor %}
+    	<tr>
+
+
+    		<th></th>
+
+    	</tr>
+        </tbody>
+    </table>
+</body>
+</html>
