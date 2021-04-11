@@ -15,6 +15,7 @@ handler500 = 'homepage.views.server_error'  # noqa
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('api.urls'), name='api'),
     path('cart/', include(('cart.urls', 'cart'), namespace='cart')),
     path('', home_views.index, name='index'),
     path('contact/', home_views.contact, name='contact'),
@@ -34,8 +35,7 @@ if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     # urlpatterns += (path('__debug__', include(debug_toolbar.urls)),)  # изм.
-    
+
 # urlpatterns += staticfiles_urlpatterns()  # изм.
 # urlpatterns += [re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT,}),]  # изм.
 # urlpatterns += [re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT,}),]  # изм.
-   

@@ -56,18 +56,23 @@
         </div>
         <br>
         <hr>
-        	<!-- Значок корзины -->
-	        <a class="cart" href="{% url "cart:cart_detail" %}" title="Перейти в корзину">
-		        {% if cart.get_total_price == 0 %}
-		        	<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-					<path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-					</svg>
-				{% elif cart.get_total_price != 0 %}
-					<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
-					<path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-					</svg>
-				{% endif %}
-			</a>
+        	<!-- Корзина -->
+        	<div class="cart-popup" id="cart_popup">
+			</div>
+			<div class="cart" id="cart" onclick="openCart()" style="cursor: pointer">
+				<a id="cartImg">
+					{% if cart.get_total_price == 0 %}
+						<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+						<path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+						</svg>
+					{% elif cart.get_total_price != 0 %}
+						<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
+						<path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+						</svg>
+					{% endif %}
+				</a>
+				<p id="cartSum">{{ cart.get_total_price|floatformat:0 }} руб.</p>
+			</div>
         <!-- Перечень товаров -->
         {% for product in products %}
         
@@ -75,6 +80,7 @@
               {{ product.name }} | цена: {{ product.price }} руб.             
         </h5>
         <p>
+        	<!--
         	<b style="background-color: #fa66b5"> 
         		{% for item in cart %}
 					{% if product.id == item.product.id %}
@@ -82,24 +88,48 @@
 					{% endif %}
 				{% endfor %}
         	</b>
+        	-->
         <form>
             <!-- {{ cart_product_form }} -->
             {% csrf_token %}
-            <input onclick="remove_product({{ product.id }}, 1, 'True')" type="button" class="button_1" value="Очистить">
+            <input onclick="remove_product('{{ product.id }}', 1, 'True'); cartView()" type="button" class="button_1" value="Очистить">
             		<big><b>[  <a id={{ product.id }}>0</a>  ]</b></big>
-            <input onclick="add_product({{ product.id }}, 1, 'False')" type="button" class="button_2" value="Добавить">
+            <input onclick="add_product('{{ product.id }}', 1, 'False')" type="button" class="button_2" value="Добавить">
         </form>
         </p> 
 
             {% if product.image %}
-            	<a href="{{ product.image.url }}">
-                <img src="{{ product.image.url }}" width=200px alt="нет изображения">
-                </a>
+                <img src="{{ product.image.url }}" class="productImg" alt={{ product.name }} id={{ product.id }} onclick="openModal('{{ product.id }}', '{{ product.image.url }}', '{{ product.name }}')" width=200px >
+				<div id="myModal" class="modal">
+					<span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+					<img class="modal-content" id="img01">
+					<div id="caption"></div>
+				</div>
             {% endif %}<br>
         <p>{{ product.description }}</p>
         <p>Срок хранения - {{ product.shelf_life }} суток.</p>
         <hr>
         {% endfor %}
+
+		<!-- Вывод модальных изображений -->
+		<script>
+		var modal = document.getElementById("myModal");
+		var modalImg = document.getElementById("img01");
+		var captionText = document.getElementById("caption");
+
+		function openModal(ID, productURL, productName) {
+			var img = document.getElementById(ID);
+			modal.style.display = "block";
+			modalImg.src = productURL;
+			captionText.innerHTML = productName;
+		}
+
+		var span = document.getElementsByClassName("close")[0];
+		span.onclick = function () {
+			modal.style.display = "none";
+		}
+		</script>
+
     </body>
 </html> 
 {% endblock %} 

@@ -42,11 +42,13 @@ EMAIL_USE_TLS = False
 # Application definition
 
 INSTALLED_APPS = [
-	'homepage',
+    'api',
+    'homepage',
     'orders',
     'products',
     'users',
     'ckeditor',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -58,7 +60,7 @@ INSTALLED_APPS = [
 ]
 
 LOGIN_URL = "/auth/login/"
-LOGIN_REDIRECT_URL = "/catalogue" 
+LOGIN_REDIRECT_URL = "/catalogue"
 LOGOUT_REDIRECT_URL = "/"
 
 MIDDLEWARE = [
@@ -122,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-#AUTH_USER_MODEL = 'users.UserProfile'
+# AUTH_USER_MODEL = 'users.UserProfile'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
