@@ -80,7 +80,7 @@
 		    
 		</style>
 	</head>
-	<body>
+	<body class="body">
 	    <h2 style="color: #800000">Ваша корзина</h2>
 	    <table>
 	        <thead>
@@ -97,14 +97,12 @@
 	            {% with product=item.product %}
 	                <tr>
 	                    <td>{{ product.name }} <br>
-	                    <a href="{{ product.image.url }}">
 	                            <img src="
 	                                {% if product.image %}
 	                                    {{ product.image.url }}
 	                                {% else %}
-	                                    {% static "img/no_image.png" %}
+	                                    нет изображения
 	                                {% endif %}" width=80px>
-	                        </a>
 	                    </td>
 	                    <td><b><a id={{ product.id }}>{{ item.quantity }}</a></b></td>
 	                    <td>

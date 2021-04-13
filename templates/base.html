@@ -100,8 +100,8 @@
 					cartView.innerHTML += "<br>";
 					cartView.innerHTML += "<b>" + data["quantity"] + " позиций,</b>";
 					cartView.innerHTML += "<b> на сумму " + data["total_price"] + " руб.</b><br><br>";
-					cartView.innerHTML += "<a href='{% url 'cart:cart_detail' %}'><button class='button_2' style='width: 170px'>Перейти в корзину</button></a>&nbsp;";
-					cartView.innerHTML += "<button class='button_1' onclick='closeCart()'>Закрыть</button>";
+					cartView.innerHTML += "<a href='{% url 'cart:cart_detail' %}'><button class='btn btn-outline-primary' style='width: 170px'>Перейти в корзину</button></a>&nbsp;";
+					cartView.innerHTML += "<button class='btn btn-outline-primary' onclick='closeCart()'>Закрыть</button>";
 				}
 			});
 		}
@@ -112,12 +112,24 @@
 		.body {
     		background-color: #FFE4C4;
 		}
+		.body_index {
+			overflow: hidden;
+			background-color: #FFE4C4;
+		}
 		b, h3, h5 {
 			color: #800000;
 		}
 		.content {
 			margin-top: 0;
 			margin-bottom: 10px;
+		}
+		.index_background {
+			position: relative;
+			z-index: 2;
+			background-color: #FFE4C4;
+			box-shadow: 2px 2px 2px rgba(0, 0, 0, .4);
+			border: 2px solid #FFE4C4;
+			border-radius: 4px;
 		}
 		.responsive {
 			max-width: 100%;
@@ -152,7 +164,9 @@
 		.cart-popup {
 			display: none;
 			width: 330px;
+			max-height: 500px;
 			padding: 10px;
+			overflow: auto;
 			right: 2%;
 			bottom: 15%;
 			position: fixed;
@@ -182,12 +196,14 @@
 		.productImg {
 			border-radius: 5px;
 			cursor: pointer;
+			margin-bottom: 10px;
 			transition: 0.3s;
+			box-shadow: 0 2px 2px rgba(0, 0, 0, .2);
 		}
 		.modal {
 			display: none;
 			position: fixed;
-			z-index: 1;
+			z-index: 3;
 			padding-top: 100px;
 			left: 0;
 			top: 0;
@@ -215,9 +231,9 @@
 		}
 		.modal-content, .cart-popup, #caption {
 			-webkit-animation-name: zoom;
-			-webkit-animation-duration: 0.4s;
+			-webkit-animation-duration: 0.6s;
 			animation-name: zoom;
-			animation-duration: 0.4s;
+			animation-duration: 0.6s;
 		}
 		@-webkit-keyframes zoom {
 			from {-webkit-transform: scale(0);}
@@ -244,10 +260,144 @@
 		@media only screen and (max-width: 700px) {
 			.modal-content {width: 100%;}
 		}
+		.slide {
+			margin-top: 1000px;
+			height: 50%;
+		}
+		.banner_1, .banner_2,
+		.banner_3, .banner_4 {
+			height: 100vh;
+			width: 100%;
+			min-width: 500px;
+			min-height: 500px;
+			position: absolute;
+			left: 0;
+			top: 50px;
+			z-index: -1;
+		}
+		.title_img {
+			height: 110%;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			animation: zoom-out 3s linear infinite;
+		}
+		@keyframes zoom-out {
+			100% {
+				height: 120%;
+			}
+		}
+		.text-box-head {
+			width: 80%;
+			position: inherit;
+			top: 25%;
+			left: 10%;
+			color: #fff;
+			animation: textup 12s linear infinite;
+			transform: translateY(100px);
+		}
+		.text-box {
+			width: 80%;
+			position: inherit;
+			bottom: 15%;
+			left: 10%;
+			color: #fff;
+			animation: textup 12s linear infinite;
+			transform: translateY(-100px);
+		}
+		.banner_1 {
+			animation: slide_1 12s linear infinite;
+		}
+		.banner_2 {
+			animation: slide_2 12s linear infinite;
+		}
+		.banner_3 {
+			animation: slide_3 12s linear infinite;
+		}
+		.banner_4 {
+			animation: slide_4 12s linear infinite;
+		}
+		@keyframes slide_1 {
+			0% {
+				visibility: visible;
+			}
+			25% {
+				visibility: hidden;
+			}
+			50% {
+				visibility: hidden;
+			}
+			75% {
+				visibility: hidden;
+			}
+			100% {
+				visibility: hidden;
+			}	
+		}
+		@keyframes slide_2 {
+			0% {
+				visibility: hidden;
+			}
+			25% {
+				visibility: hidden;
+			}
+			50% {
+				visibility: visible;
+			}
+			75% {
+				visibility: hidden;
+			}
+			100% {
+				visibility: hidden;
+			}	
+		}
+		@keyframes slide_3 {
+			0% {
+				visibility: hidden;
+			}
+			25% {
+				visibility: hidden;
+			}
+			50% {
+				visibility: hidden;
+			}
+			75% {
+				visibility: visible;
+			}
+			100% {
+				visibility: hidden;
+			}	
+		}
+		@keyframes slide_4 {
+			0% {
+				visibility: hidden;
+			}
+			25% {
+				visibility: hidden;
+			}
+			50% {
+				visibility: hidden;
+			}
+			75% {
+				visibility: hidden;
+			}
+			100% {
+				visibility: visible;
+			}	
+		}
+		@keyframes textup {
+			10% {
+				transform: translateY(0px);
+			}
+			100% {
+				transform: translateY(0px);
+			}
+		}
 	</style>
 
 </head>
-<body class="body">
+<body>
     {% include 'nav.html' %}
     <main class="content">
         <div class="container">
