@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'paw#r5w(2+m5@yv#(p5r=evm6q(o@=45wmgt&drur6w0*8r13t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '188.225.76.225']
 
@@ -33,9 +33,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
-EMAIL_HOST = 'smtp.timeweb.ru'
-EMAIL_HOST_USER = 'info@cake-point.ru'
-EMAIL_HOST_PASSWORD = 'JBdNwy8r'
+EMAIL_HOST = ''
+EMAIL_HOST_USER = '
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 2525
 EMAIL_USE_TLS = False
 
