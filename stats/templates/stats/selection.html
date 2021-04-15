@@ -26,9 +26,9 @@
         <h3>Реализация:</h3>
         {% for item in selection_modified %}
         <tr>
-            <td>{{ item.product_name }}</td>
+            <td>{{ item.product.name }}</td>
             <td>{{ item.quantity }}</td>
-            <td>{{ item.product_manufacturer }}</td>
+            <td>{{ item.product.manufacturer }}</td>
             <td>{{ item.product.category }}</td>
             <td>{{ item.product_price }}</td>
             <td>{{ item.product_price_purc }}</td>
@@ -56,7 +56,7 @@
         </thead>
         <tbody>
         <h3>Возвраты:</h3>
-        {% for item in return_goods %}
+        {% for item in returned_goods %}
         <tr>
             <td>{{ item.product.name }}</td>
             <td>{{ item.quantity }}</td>

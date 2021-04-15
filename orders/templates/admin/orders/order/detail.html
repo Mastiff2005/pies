@@ -24,7 +24,7 @@
 
       <p><strong>Поставщик:</strong> &nbsp; &nbsp; ДОЛ ХЛЕБ
       <br>
-        <strong>Покупатель:</strong> &nbsp; &nbsp; {{ user.first_name }}, {{ user.address }}<br>
+        <strong>Покупатель:</strong> &nbsp; &nbsp; {{ user.organization }}, {{ user.address }}<br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ user.phone }}</p>
 
     <div class="module">
@@ -78,7 +78,5 @@
 </html>
 
 <ul class="object-tools">
-  <li>
-  <a href="#" onclick="window.print();">--></a>
-  </li>
-  </ul>
+  <button onclick="window.print();" style="opacity: 0; cursor: pointer;">Печать</button>
+</ul>

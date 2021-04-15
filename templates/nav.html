@@ -1,39 +1,39 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #800000; 
-														 margin-bottom: 10px; z-index: 3;">
-    <div class="container-fluid">
-    	<!--<a class="navbar-brand" href="/"><strong><span style="color:darkred">CAKE POINT</span></strong></a> -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse"
-          data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-              aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <strong><a class="nav-link" href="{% url 'index' %}" style="color: #FFE4C4">О НАС</a></strong>
-            <strong><a class="nav-link" href="{% url 'cart:cart_detail' %}" style="color: #FFE4C4">КОРЗИНА/ОФОРМИТЬ ЗАКАЗ</a></strong>
-            <strong><a class="nav-link" href="{% url 'contact' %}" style="color: #FFE4C4">ДОСТАВКА/КОНТАКТЫ</a></strong>
-        </div>&ensp;
-        <div class="dropdown" id="accountmenu">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: #FFE4C4"><strong>КАТАЛОГ</strong><b class="caret"></b></a>
-          <ul class="dropdown-menu" style="background-color: #800000">
-              <li><a href="{% url 'catalogue_pies' %}" style="color:#FFE4C4"><strong>ТОРТЫ</strong></a></li><br>
-              <li><a href="{% url 'catalogue_superpies' %}" style="color:#FFE4C4"><strong>ТОРТЫ НА ЗАКАЗ</strong></a></li><br>
-              <li><a href="{% url 'catalogue' %}" style="color:#FFE4C4"><strong>ВЫПЕЧКА И ДЕСЕРТЫ</strong></a></li><br>
-              <li><a href="{% url 'catalogue_cookie' %}" style="color:#FFE4C4"><strong>ФАСОВКА</strong></a></li>
-          </ul>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-light flex-column nav-message" style="background-color: #800000; margin-bottom: 10px; z-index: 3;">
+  <div class="container-fluid">
+      <!--<a class="navbar-brand" href="/"><strong><span style="color:darkred">CAKE POINT</span></strong></a> -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+        data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+            aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+          <strong><a class="nav-link" href="{% url 'index' %}" style="color: #FFE4C4">О НАС</a></strong>
+          <strong><a class="nav-link" href="{% url 'cart:cart_detail' %}" style="color: #FFE4C4">КОРЗИНА/ОФОРМИТЬ ЗАКАЗ</a></strong>
+          <strong><a class="nav-link" href="{% url 'contact' %}" style="color: #FFE4C4">ДОСТАВКА/КОНТАКТЫ</a></strong>
+      </div>&ensp;
+      <div class="dropdown" id="accountmenu">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: #FFE4C4"><strong>КАТАЛОГ</strong><b class="caret"></b></a> 
+        <ul class="dropdown-menu" style="background-color: #800000">
+            <li><a href="{% url 'catalogue_pies' %}" style="color:#FFE4C4"><strong>ТОРТЫ</strong></a></li><br>
+            <li><a href="{% url 'catalogue_superpies' %}" style="color:#FFE4C4"><strong>ТОРТЫ НА ЗАКАЗ</strong></a></li><br>
+            <li><a href="{% url 'catalogue' %}" style="color:#FFE4C4"><strong>ВЫПЕЧКА И ДЕСЕРТЫ</strong></a></li><br>
+            <li><a href="{% url 'catalogue_cookie' %}" style="color:#FFE4C4"><strong>ФАСОВКА</strong></a></li>
+        </ul>
       </div>
-    	<nav class="my-2 my-md-0 mr-md-3">
-	        {% if user.is_authenticated %}
-	        <font style="color: #FFE4C4">Пользователь: {{ user.username }}.</font>
-	        <a class="p-2" href="{% url 'password_change' %}" style="color: #FFE4C4">Изменить пароль</a><font style="color: #FFE4C4">|</font>
-	        <a class="p-2" href="{% url 'logout' %}" style="color: #FFE4C4">Выйти</a>
-	        {% else %}
-	        <a class="p-2" href="{% url 'login' %}" style="color: #FFE4C4">Войти</a> <font style="color: #FFE4C4">|</font>
-	        <a class="p-2" href="{% url 'signup' %}" style="color: #FFE4C4">Регистрация</a>
-        	{% endif %}
-    	</nav>
-	</div>
+    </div>
+    <nav class="my-2 my-md-0 mr-md-3">
+            {% if user.is_authenticated %}
+            <font style="color: #FFE4C4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                  <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                </svg>  {{ user.username }}</font>
+            <a class="p-2" href="{% url 'password_change' %}" style="color: #FFE4C4">Изменить пароль</a><font style="color: #FFE4C4">|</font>
+            <a class="p-2" href="{% url 'logout' %}" style="color: #FFE4C4">Выйти</a>
+            {% else %}
+            <a class="p-2" href="{% url 'login' %}" style="color: #FFE4C4">Войти</a> <font style="color: #FFE4C4">|</font>
+            <a class="p-2" href="{% url 'signup' %}" style="color: #FFE4C4">Регистрация</a>
+            {% endif %}
+    </nav>
+  </div>
 </nav>
-
-
