@@ -29,15 +29,16 @@ ALLOWED_HOSTS = ['127.0.0.1', '188.225.76.225']
 
 CART_SESSION_ID = 'cart'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # в продакшене
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 
-# EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
 
-EMAIL_HOST = 'smtp.timeweb.ru'
-EMAIL_HOST_USER = 'info@cake-point.ru'
-EMAIL_HOST_PASSWORD = 'JBdNwy8r'
-EMAIL_PORT = 2525
-EMAIL_USE_TLS = False
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
+# EMAIL_USE_TLS = False
 
 # Application definition
 
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'homepage',
     'orders',
     'products',
+    'stats',
     'users',
     'ckeditor',
     'rest_framework',
@@ -124,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# AUTH_USER_MODEL = 'users.UserProfile'
+AUTH_USER_MODEL = 'users.UserProfile'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
