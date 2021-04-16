@@ -129,6 +129,8 @@ dmypy.json
 .pyre/
 
 static/
+!/static/css/
+!/static/js/
 media/
 
 db.sqlite3
