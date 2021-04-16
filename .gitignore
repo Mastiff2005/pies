@@ -128,9 +128,11 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+homepage/static
 static/*
-!static/css/
-!static/js/
+!/static/css/
+!/static/js/
+!static/admin.css
 media/
 
 db.sqlite3
