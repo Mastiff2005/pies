@@ -4,7 +4,7 @@ from .models import Product
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ("pk", "name", "category", "manufacturer", "description", 
+    list_display = ("pk", "name", "category", "manufacturer", "description",
                     "shelf_life", "price", "price_purc", "hidden", "image")
     search_fields = ("name",)
     list_filter = ("category", "manufacturer", "hidden")

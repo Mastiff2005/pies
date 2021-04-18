@@ -16,22 +16,22 @@ function get_quantity(productID) {
     let count = document.getElementById(productID);
     count.innerHTML = 0;
     $.ajax({
-	    	url: "/api/cart_view/",
-	        method: 'GET',
-	        success: function(data) {
-	        	let arr = data["items"];
-	        	let len= arr.length;
-	            for (let number = 0; number < len; number++) {
-	                if (data["items"][number]["id"] == productID) {
-	                	count.innerHTML = data["items"][number]["quantity"];
-	                }
-	            }
-	        }
-	 });
+        url: "/api/cart_view/",
+        method: 'GET',
+        success: function(data) {
+            let arr = data["items"];
+            let len= arr.length;
+            for (let number = 0; number < len; number++) {
+                if (data["items"][number]["id"] == productID) {
+                    count.innerHTML = data["items"][number]["quantity"];
+                }
+            }
+        }
+	});
 }
 
 function closeCart() {
-document.getElementById("cart_popup").style.display = "none";
+    document.getElementById("cart_popup").style.display = "none";
 }
 
 function openCart() {
