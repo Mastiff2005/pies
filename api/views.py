@@ -13,6 +13,7 @@ def cart_view(request):
     for item in cart:
         items.append(
             {
+                'id': (item['product']).id,
                 'name': (item['product']).name,
                 'quantity': item['quantity'],
                 'price': item['total_price']
