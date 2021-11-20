@@ -7,6 +7,7 @@ from users.models import UserProfile
 
 class Order(models.Model):
     invoice_num = models.IntegerField(blank=True, null=True, default=0)
+    manufacturer = models.TextField(max_length=255, default='ДОЛ ХЛЕБ')
     user = models.ForeignKey(
         UserProfile, on_delete=models.PROTECT,
         blank=True, null=True, related_name='orders'

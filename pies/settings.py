@@ -10,6 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+import environ
+env = environ.Env()
+environ.Env.read_env()
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'paw#r5w(2+m5@yv#(p5r=evm6q(o@=45wmgt&drur6w0*8r13t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(strtobool(os.environ.get('DEBUG', 'True')))
 
 ALLOWED_HOSTS = ['127.0.0.1', '188.225.76.225']
 
@@ -43,14 +46,6 @@ EMAIL_PORT = 1025
 # Application definition
 
 INSTALLED_APPS = [
-    'api',
-    'homepage',
-    'orders',
-    'products',
-    'stats',
-    'users',
-    'ckeditor',
-    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -58,7 +53,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+
+    'ckeditor',
+    'rest_framework',
+
+    'api',
+    'cart',
     'cart.apps.CartConfig',
+    'homepage',
+    'orders',
+    'products',
+    'stats',
+    'users',
 ]
 
 LOGIN_URL = "/auth/login/"
@@ -105,6 +111,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+} if DEBUG else {
+    'default': env.db(),
 }
 
 

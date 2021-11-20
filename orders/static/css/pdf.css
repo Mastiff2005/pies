@@ -11,12 +11,24 @@ table {
     margin:20px 0;
 }
 
-table th, table td {
+.table_body {
+    border: 1px solid #000;
+}
+
+.table_body th, .table_body td {
     text-align:left;
     font-size:14px;
     padding:10px;
     margin:0;
-    border: 1px solid rgb(0, 0, 0);
+    border: 1px solid #000;
+}
+
+.table_header {
+    text-align:left;
+    font-size:14px;
+    padding:10px;
+    margin:0;
+    border: 1px solid #000;
 }
 
 tbody tr:nth-child(odd) {

@@ -175,7 +175,7 @@ b, h3, h5 {
     min-height: 500px;
     position: absolute;
     left: 0;
-    top: 0;
+    top: -35px;
     z-index: 0;
 }
 .title_img {
