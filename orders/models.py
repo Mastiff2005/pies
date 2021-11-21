@@ -6,8 +6,17 @@ from users.models import UserProfile
 
 
 class Order(models.Model):
+    MANUFACTURER_CHOICES = (
+        ('ДОЛ ХЛЕБ', 'ДОЛ ХЛЕБ'),
+        ('ООО «Сладкая мечта», ИНН 7724870668, '
+         'КПП 772401001, 115477, г. Москва, ул. Промышленная, д.10', 'СЛАТИНИ'
+         ),
+    )
     invoice_num = models.IntegerField(blank=True, null=True, default=0)
-    manufacturer = models.TextField(max_length=255, default='ДОЛ ХЛЕБ')
+    manufacturer = models.TextField(
+        max_length=255, choices=MANUFACTURER_CHOICES,
+        default='ДОЛ ХЛЕБ'
+    )
     user = models.ForeignKey(
         UserProfile, on_delete=models.PROTECT,
         blank=True, null=True, related_name='orders'

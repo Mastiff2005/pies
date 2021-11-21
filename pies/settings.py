@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'api',
-    'cart',
     'cart.apps.CartConfig',
     'homepage',
     'orders',
