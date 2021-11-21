@@ -12,17 +12,6 @@
 <body>
   <h2>Накладная № {{ order.invoice_num }} от {{ order.created }}</h2>
 
-  <!-- <table>
-        <tr>
-          <th>Поставщик: </th>
-          <td>ДОЛ ХЛЕБ</td>
-        </tr>
-        <tr>
-          <th>Покупатель:</th>
-          <td>{{ user.first_name }}, {{ user.address }}<br>т. {{ user.phone }}</td>
-        </tr>
-      </table> -->
-
   <table class="table_header" style="border: 1px solid #fff;">
 
     <tr>
@@ -37,7 +26,9 @@
 
       <td style="vertical-align: top;"><strong>Покупатель:</strong></td>
 
-      <td>{{ user.first_name }}, {{ user.address }}, {{ user.phone }}</td>
+      <td>{{ user.first_name }}, {{ user.address }},
+          <br>
+          тел. {{ user.phone }}</td>
 
     </tr>
 
